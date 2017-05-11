@@ -118,28 +118,28 @@ body.play.pause .credits {
     background: transparent;
     border: none;
     cursor: pointer;
-    height: 2em;
+    height: 2.6em;
     outline: none;
     position: relative;
-    width: 2em;
+    width: 3em;
 }
 .system menu .play::before {
-    border-color: transparent transparent transparent #fff;
-    border-style: solid;
-    border-width: .5em 0 .5em .8em;
+    background: linear-gradient(90deg, #fff 35%, transparent 35%, transparent 65%, #fff 65%);
+    border-width: 0;
     content: '';
     display: inline-block;
-    height: 0;
+    height: 1em;
     left: calc(50% - .4em);
     position: absolute;
     top: calc(50% - .5em);
-    width: 0;
+    width: .8em;
 }
 .system menu .play.pause::before {
-    background: linear-gradient(90deg, #fff 35%, transparent 35%, transparent 65%, #fff 65%);
-    border-width: 0;
-    height: 1em;
-    width: .8em;
+    border-color: transparent transparent transparent #fff;
+    border-style: solid;
+    border-width: .5em 0 .5em .8em;
+    height: 0;
+    width: 0;
 }
 
 
