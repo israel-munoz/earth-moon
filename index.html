@@ -1,0 +1,274 @@
+<!-- From Earth to the Moon. A CSS variables exercise
+     Israel Muñoz
+     https://github.com/israel-munoz/earth-moon
+-->
+<!--
+    This is an example for using CSS variables with animations.
+    CSS variables are initialized inside a selector, which will be its scope.
+    Any "child" selector for this one will have the same variable.
+
+    :root {
+        --sizeBase: 100px;
+    }
+
+    .container {
+        width: calc(var(--sizeBase) * 8);
+        font-size: calc(var(--sizeBase) * .2);
+    }
+
+    Any property defined to use a variable will apply the inherited value.
+    However, if a more specific selector replaces the variable value, the property
+    will apply the new value instead.
+
+    .planet {
+        background-image: var(--image);
+    }
+    .planet .earth {
+        --image: url('imgs/earth.png');
+    }
+    .planet .mars {
+        --image: url('imgs/mars.png');
+    }
+
+
+    Relative values
+    In this example, there are some base values for size, position and time properties.
+    Every size and position property in the page elements is relative to those values.
+    For the animations, they are all relative to the time base. The delay for each element
+    also depends on the previous ones. Each element sums the duration of its predecessors
+    to begin its animation.
+
+
+    Browser support
+    Support for required CSS specifications is defined at http://www.caniuse.com/
+    This test is mainly based on the following standards:
+    - CSS Custom Properties for Cascading Variables Module Level 1 (draft) https://drafts.csswg.org/css-variables/
+    - CSS Transforms Module Level 1 https://www.w3.org/TR/css-transforms-1/
+    - CSS Animations https://www.w3.org/TR/css3-animations/
+    - CSS Values and Units Module Level 3 (for calc function) https://www.w3.org/TR/css3-values/#calc-notation
+    
+    Firefox supports all of these specifications. However, it doesn't support the use of
+    time variables in the calc() function, which means the animation won't work.
+    At the moment of this publication, Chrome is the only browser to run the test correctly.
+-->
+
+<!-- De la Tierra a la Luna. Un ejercicio con variables de CSS -->
+<!--
+    Esto es un ejemplo del uso de variables de CSS con animaciones.
+    Las variables de CSS son inicializadas dentro de un selector, lo cual
+    define su alcance. Cualquier selector "hijo" para éste tendrá la
+    misma variable.
+
+    :root {
+        --sizeBase: 100px;
+    }
+
+    .container {
+        width: calc(var(--sizeBase) * 8);
+        font-size: calc(var(--sizeBase) * .2);
+    }
+
+    Cualquier propiedad definida para usar una variable aplicará el valor
+    heredado. Sin embargo, si un selector más específico reemplaza su valor,
+    la propiedad aplicará dicho valor nuevo.
+
+    .planet {
+        background-image: var(--image);
+    }
+    .planet .earth {
+        --image: url('imgs/earth.png');
+    }
+    .planet .mars {
+        --image: url('imgs/mars.png');
+    }
+
+
+    Valores relativos
+    En este ejemplo, hay algunos valores base parapropiedades de tamaño,
+    posición y tiempo. Cada propiedad de tamaño y posición en los elementos de
+    la página es relativo a dichos valores.
+    Para las animaciones, éstas son relativas al tiempo base. El retraso para
+    cada elemento depende también de los anteriores. Cada elemento suma la duración
+    de sus predecesores para comenzar su animación.
+
+
+    Soporte de navegadores
+    El soporte para las especificaciones de CSS requeridas está definido en http://www.caniuse.com/
+    Este ejercicio está basado principalmente en los siguientes estándares:
+    - CSS Custom Properties for Cascading Variables Module Level 1 (draft) https://drafts.csswg.org/css-variables/
+    - CSS Transforms Module Level 1 https://www.w3.org/TR/css-transforms-1/
+    - CSS Animations https://www.w3.org/TR/css3-animations/
+    - CSS Values and Units Module Level 3 (for calc function) https://www.w3.org/TR/css3-values/#calc-notation
+    
+    Firefox soporta todas estas especificaciones. Sin embargo, no soporta el uso de
+    variables de tiempo en la función calc(), lo que significa que la animación no
+    funcionará.
+    Al momento de esta publicación, Chrome es el único navegador que corre la prueba correctamente.
+-->
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+    <head>
+        <title>From Earth to the Moon</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content="Example of CSS variables for animations"/>
+        <meta name="author" content="Israel Muñoz <israel.munoz.v@gmail.com>"/>
+        <link href="planets.css" rel="stylesheet"/>
+        <link rel="shortcut icon" href="imgs/earth.png"/>
+    </head>
+    <body>
+        <div class="poster">
+            <h1>From Earth to the Moon. A CSS variables exercise</h1>
+            <img src="imgs/og_image.jpg"/>
+        </div>
+        <div class="front">
+            <h1>Idioma / Language</h1>
+            <div class="langs">
+                <div class="lang">
+                    <input type="radio" name="lang" id="lang-en" value="en" checked="checked"/>
+                    <label for="lang-en">English</label>
+                </div>
+                <div class="lang">
+                    <input type="radio" name="lang" id="lang-es" value="es" />
+                    <label for="lang-es">Español</label>
+                </div>
+            </div>
+            <button type="button" class="start">
+                <span class="en">Start</span>
+                <span class="es">Iniciar</span>
+            </button>
+        </div>
+        <div class="system">
+            <menu class="controls">
+                <div class="langs">
+                    <div class="lang">
+                        <input type="radio" name="menu-lang" id="menu-lang-en" value="en" checked="checked"/>
+                        <label for="menu-lang-en">EN</label>
+                    </div>
+                    <div class="lang">
+                        <input type="radio" name="menu-lang" id="menu-lang-es" value="es"/>
+                        <label for="menu-lang-es">ES</label>
+                    </div>
+                </div>
+                <button class="play"></button>
+            </menu>
+            <h1>
+                <span class="en">Did you know...</span>
+                <span class="es">¿Sabías que...</span>
+            </h1>
+            <h2>
+                <span class="en">...when the moon is at its farthest point from Earth, all the other planets of the Solar System fit between them?</span>
+                <span class="es">...cuando la Luna está en su punto más alejado de la Tierra, todos los demás planetas del Sistema Solar caben entre ellas?</span>
+
+                </h2>
+            <div class="distance">
+                <div class="planet earth"></div>
+                <div class="planet moon"></div>
+                <div class="description">
+                    <span class="en">Distance from Moon to Earth at apogee:</span>
+                    <span class="es">Distancia de la Luna a la Tierra en el apogeo:</span>
+                    406,000 km
+                </div>
+            </div>
+            <div class="planets">
+                <div class="planet mercury">
+                    <div class="description">
+                        <div class="name">
+                            <span class="en">Mercury</span>
+                            <span class="es">Mercurio</span>
+                        </div>
+                        <div class="size">4,879.4 km</div>
+                    </div>
+                </div>
+                <div class="planet venus">
+                    <div class="description">
+                        <div class="name">Venus</div>
+                        <div class="size">12,103.6 km</div>
+                    </div>
+                </div>
+                <div class="planet mars">
+                    <div class="description">
+                        <div class="name">
+                            <span class="en">Mars</span>
+                            <span class="es">Marte</span>
+                        </div>
+                        <div class="size">6,794.4 km</div>
+                    </div>
+                </div>
+                <div class="planet jupiter">
+                    <div class="description">
+                        <div class="name">
+                            <span class="en">Jupiter</span>
+                            <span class="es">Júpiter</span>
+                        </div>
+                        <div class="size">142,984 km</div>
+                    </div>
+                </div>
+                <div class="planet saturn">
+                    <div class="description">
+                        <div class="name">
+                            <span class="en">Saturn</span>
+                            <span class="es">Saturno</span>
+                        </div>
+                        <div class="size">120,536 km</div>
+                    </div>
+                </div>
+                <div class="planet uranus">
+                    <div class="description">
+                        <div class="name">
+                            <span class="en">Uranus</span>
+                            <span class="es">Urano</span>
+                        </div>
+                        <div class="size">51,118 km</div>
+                    </div>
+                </div>
+                <div class="planet neptune">
+                    <div class="description">
+                        <div class="name">
+                            <span class="en">Neptune</span>
+                            <span class="es">Neptuno</span>
+                        </div>
+                        <div class="size">49,572 km</div>
+                    </div>
+                </div>
+                <div class="total-length">
+                    <span class="en">Approximate sum of the diameters of the planets (except Earth):</span>
+                    <span class="es">Suma aproximada de los diámetros de los planetas (excepto la Tierra):</span>
+                    387,987.4 km
+                </div>
+            </div>
+        </div>
+        <div class="credits">
+            <div class="author">Israel Mu&ntilde;oz</div>
+            <div class="link email"><a href="mailto:israel.munoz.v@gmail.com" target="_blank">israel.munoz.v@gmail.com</a></div>
+            <div class="link github"><a href="https://github.com/israel-munoz" target="_blank">https://github.com/israel-munoz</a></div>
+            <div class="link facebook"><a href="https://facebook.com/isra.mv" target="_blank">isra.mv</a></div>
+
+            <div class="resources">
+                <div class="link">
+                    <span class="en">Source:</span>
+                    <span class="es">Fuente:</span>
+                    <a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a>
+                </div>
+                <div class="link">
+                    <span class="en">Images:</span>
+                    <span class="es">Imágenes:</span>
+                    <a href="https://www.wikimedia.org/" target="_blank">Wikimedia</a>
+                </div>
+                <div class="link">
+                    <span class="en">Starry Night background:</span>
+                    <span class="es">Fondo de estrellas:</span>
+                    <a href="http://lea.verou.me/css3patterns/" target="_blank">
+                        <span class="es">Galería de Patrones de CSS3 de</span>
+                        Lea Verou<span class="en">'s CSS3 Patterns Gallery</span></a>
+                </div>
+            </div>
+
+            <button class="replay">
+                <span class="en">Replay</span>
+                <span class="es">Repetir</span>
+            </button>
+        </div>
+        <script src="planets.js"></script>
+    </body>
+</html>

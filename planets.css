@@ -1,0 +1,581 @@
+/*! From Earth to the Moon. A CSS variables exercise
+    Israel Muñoz
+    https://github.com/israel-munoz/earth-moon
+
+ *  This CSS file contains all of the test configuration for the layout and animation sequence
+ *  The variables are declared at the :root element, and applied as fits for each element.
+
+ *  Este archivo CSS contiene toda la configuración del ejercicio para la presentación y secuencia de animación.
+ *  Las variables están declaradas en el elemento :root, y aplican segun corresponda a cada elemento.
+ */
+
+:root {
+    --sizeFactor: .5;
+    --screenSize: calc(780px * var(--sizeFactor));
+    --systemSize: 4200;
+    --sizeBase: calc(var(--screenSize) / var(--systemSize));
+    --timeBase: .5s;
+    --unitBase: calc(var(--sizeBase) * var(--systemSize) / 100);
+
+    --width: calc(var(--sizeBase) * var(--systemSize));
+    --height: calc(var(--width) / 1.6);
+
+    --distance: calc(3978.92 * var(--sizeBase));
+
+    --earth: calc(127.42 * var(--sizeBase));
+    --moon: calc(34.74 * var(--sizeBase));
+    --mercury: calc(48.794 * var(--sizeBase));
+    --venus: calc(121.036 * var(--sizeBase));
+    --mars: calc(67.944 * var(--sizeBase));
+    --jupiter: calc(1429.84 * var(--sizeBase));
+    --saturn: calc(1205.36 * var(--sizeBase));
+    --uranus: calc(511.18 * var(--sizeBase));
+    --neptune: calc(495.72 * var(--sizeBase));
+    --pause: calc(var(--timeBase) * 1);
+    --textDuration: calc(var(--timeBase) * 10);
+    --distanceDelay: calc(var(--textDuration) + var(--pause) * 3);
+    --distanceDuration: calc(var(--timeBase) * 8);
+    --planetDelay: calc(var(--distanceDelay) + var(--distanceDuration) + var(--pause));
+    --planetDuration: calc(var(--timeBase) * 5);
+    --totalLengthDelay: calc(var(--planetDelay) + var(--planetDuration) * 7 + var(--pause) * 4);
+    --totalLengthDuration: calc(var(--timeBase) * 1);
+    --fadeOutDelay: calc(var(--totalLengthDelay) + var(--pause) * 10);
+    --fadeOutDuration: calc(var(--timeBase) * 5);
+}
+html, body, .system, .credits {
+    height: 100%;
+}
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'segoe ui', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/** Languages */
+html:not([lang|=es]) .en,
+html[lang|=es] .es {
+    display: inline;
+}
+html:not([lang|=es]) .es,
+html[lang|=es] .en {
+    display: none;
+}
+
+
+body.play.pause .system,
+body.play.pause .system h1,
+body.play.pause .system h2,
+body.play.pause .system .distance .planet,
+body.play.pause .system .distance .description,
+body.play.pause .system .planets .planet,
+body.play.pause .system .planet.saturn::before,
+body.play.pause .system .planet.saturn::after,
+body.play.pause .system .planets .planet .description,
+body.play.pause .system .total-length,
+body.play.pause .credits {
+    animation-play-state: paused;
+}
+
+
+.system menu {
+    display: flex;
+    position: absolute;
+    width: fit-content;
+    z-index: 2;
+}
+.system menu .langs {
+    display: flex;
+    width: fit-content;
+}
+.system menu .langs .lang {
+    flex: 1 50%;
+}
+.system menu .langs .lang input {
+    height: 0;
+    position: absolute;
+    visibility: hidden;
+    width: 0;
+}
+.system menu .langs .lang label {
+    display: inline-block;
+    padding: .3em .5em;
+    transition: box-shadow .5s;
+}
+.system menu .langs .lang input:checked + label {
+    box-shadow: inset 0 0 .5em #fff;
+}
+.system menu .langs .lang:first-child label {
+    border-bottom-left-radius: .5em;
+    border-top-left-radius: .5em;
+}
+.system menu .langs .lang:last-child label {
+    border-bottom-right-radius: .5em;
+    border-top-right-radius: .5em;
+}
+.system menu .play {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    height: 2em;
+    outline: none;
+    position: relative;
+    width: 2em;
+}
+.system menu .play::before {
+    border-color: transparent transparent transparent #fff;
+    border-style: solid;
+    border-width: .5em 0 .5em .8em;
+    content: '';
+    display: inline-block;
+    height: 0;
+    left: calc(50% - .4em);
+    position: absolute;
+    top: calc(50% - .5em);
+    width: 0;
+}
+.system menu .play.pause::before {
+    background: linear-gradient(90deg, #fff 35%, transparent 35%, transparent 65%, #fff 65%);
+    border-width: 0;
+    height: 1em;
+    width: .8em;
+}
+
+
+.system h1, .system h2 {
+    font-family: inherit;
+    font-weight: 600;
+    opacity: 0;
+    position: absolute;
+    width: 85%;
+}
+body.play .system h1, body.play .system h2 {
+    animation: var(--textDuration) text var(--pause) linear 1 forwards;
+}
+.system h1 {
+    --translate: calc(var(--unitBase) * -3);
+    font-size: calc(var(--unitBase) * 6);
+    left: calc(var(--unitBase) * 2);
+    margin: 0;
+    top: calc(var(--unitBase) * 12);
+}
+.system h2 {
+    --translate: calc(var(--unitBase) * 3);
+    font-size: calc(var(--unitBase) * 3);
+    right: calc(var(--unitBase) * 2);
+    top: calc(var(--unitBase) * 24);
+}
+body.play .system h2 {
+    animation-delay: calc(var(--pause) * 2);
+}
+div {
+    box-sizing: border-box;
+}
+
+.system {
+    background-image:
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+        radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
+    height: var(--height);
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: var(--width);
+}
+body.play .system {
+    animation: var(--fadeOutDuration) fadeout var(--fadeOutDelay) 1 forwards;
+}
+
+.planet {
+    background-image: var(--image);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 50%;
+    height: var(--planet);
+    position: absolute;
+    width: var(--planet);
+}
+
+.planet .description {
+    position: absolute;
+    text-align: center;
+    top: 100%;
+    transform-origin: 50% 0;
+    width: 100%;
+}
+
+.distance .planet {
+    --center: calc((var(--distance) + var(--earth) + var(--moon)) / 2);
+    background-position: 100% 0;
+    background-size: cover;
+    opacity: 0;
+    position: absolute;
+}
+body.play .distance .planet {
+    animation: var(--distanceDuration) distance-object var(--distanceDelay) 1 linear forwards;
+}
+
+.distance .planet.earth {
+    --transform: scale(10) translateX(calc((var(--center) - var(--sizeBase) * 600) / 10));
+    --planet: var(--earth);
+    --image: url(imgs/earth.png);
+    left: 0;
+    top: calc((var(--height) - var(--earth)) / 2);
+    transform: var(--transform)!important;
+}
+.distance .planet.moon {
+    --transform: scale(10) translateX(calc((var(--center) - var(--sizeBase) * 600) / -10));
+    --planet: var(--moon);
+    --image: url(imgs/moon.png);
+    right: 0;
+    top: calc((var(--height) - var(--moon)) / 2);
+    transform: var(--transform);
+}
+.distance .description {
+    --translate: calc(var(--sizeBase) * 100);
+    font-size: calc(var(--unitBase) * 2.5);
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    top: calc(var(--sizeBase) * 100);
+    width: 100%;
+}
+body.play .distance .description {
+    animation: var(--distanceDuration) distance-desc calc(var(--distanceDelay) + var(--pause)) 1 linear forwards;
+}
+
+.planets {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.planets .planet {
+    --center: calc((var(--distance) + var(--earth) + var(--moon)) / 2);
+    left: var(--left);
+    opacity: 0;
+    position: absolute;
+    top: calc((var(--height) - var(--planet)) / 2);
+    transform: scale(var(--scale)) translateX(calc((var(--center) / var(--scale)) - (var(--left) / var(--scale))));
+}
+body.play .planets .planet {
+    animation: planet var(--planetDuration) linear calc(var(--planetDelay) + var(--planetDuration) * var(--index) + var(--pause) * 2) 1 forwards;
+}
+
+.planets .planet .description {
+    left: -250%;
+    opacity: 0;
+    overflow: hidden;
+    transform: scale(calc(1 / var(--scale)));
+    width: 0;
+}
+body.play .planets .planet .description {
+    animation: planet-desc var(--planetDuration) linear calc(var(--planetDelay) + var(--planetDuration) * var(--index)) 1 forwards;
+}
+
+.planets .planet.mercury {
+    --index: 0;
+    --scale: 20;
+    --planet: var(--mercury);
+    --left: var(--earth);
+    --image: url(imgs/mercury.png);
+}
+.planets .planet.venus {
+    --index: 1;
+    --scale: 8.04;
+    --planet: var(--venus);
+    --left: calc(var(--earth) + var(--mercury));
+    --image: url(imgs/venus.png);
+}
+
+.planets .planet.mars {
+    --index: 2;
+    --scale: 14.33;
+    --planet: var(--mars);
+    --left: calc(var(--earth) + var(--mercury) + var(--venus));
+    --image: url(imgs/mars.png);
+}
+
+.planets .planet.jupiter {
+    --index: 3;
+    --scale: .677;
+    --planet: var(--jupiter);
+    --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars));
+    --image: url(imgs/jupiter.png);
+}
+.planets .planet.saturn {
+    --index: 4;
+    --scale: .798;
+    --planet: var(--saturn);
+    --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars) + var(--jupiter));
+    perspective: 1000px;
+}
+.planet.saturn::before,
+.planet.saturn::after {
+    content: '';
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+}
+.planet.saturn::before {
+    background-image: url(imgs/saturn.png);
+    background-size: 100% 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    transform: rotateZ(40deg);
+    width: 100%;
+}
+body.play .planet.saturn::before {
+    animation: saturn-planet var(--planetDuration) linear calc(var(--planetDelay) + var(--planetDuration) * var(--index) + var(--pause) * 2) 1 forwards;
+}
+.planet.saturn::after {
+    background: radial-gradient(circle closest-corner at 55% 25%, transparent 90%, #1e1d1b 90%, #e6ddc9 92%, #696252 94%, #cec6ba 100%);
+    height: 150%;
+    left: -17%;
+    top: -25%;
+    transform: rotateX(83deg) rotateY(40deg) scaleX(1.3);
+    width: 140%;
+}
+body.play .planet.saturn::after {
+    animation: saturn-rings var(--planetDuration) linear calc(var(--planetDelay) + var(--planetDuration) * var(--index) + var(--pause) * 2) 1 forwards;
+}
+.planets .planet.uranus {
+    --index: 5;
+    --scale: 1.898;
+    --planet: var(--uranus);
+    --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars) + var(--jupiter) + var(--saturn));
+    --image: url(imgs/uranus.png);
+}
+.planets .planet.neptune {
+    --index: 6;
+    --scale: 1.963;
+    --planet: var(--neptune);
+    --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars) + var(--jupiter) + var(--saturn) + var(--uranus));
+    --image: url(imgs/neptune.png);
+}
+
+.planets .total-length {
+    font-size: calc(var(--unitBase) * 2.5);
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    top: calc(var(--unitBase) * 7);
+    width: 100%;
+}
+body.play .planets .total-length {
+    animation: var(--totalLengthDuration) total-length var(--totalLengthDelay) 1 forwards;
+}
+
+
+/** Front and Credits views */
+.poster {
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 0;
+}
+.front,
+.credits {
+    left: calc((100% - var(--width)) / 2);
+    position: absolute;
+    top: 0;
+    width: var(--width);
+}
+.front {
+    background-color: #000;
+    font-size: calc(var(--sizeBase) * 100);
+    height: var(--height);
+    z-index: 3;
+}
+.front h1 {
+    text-align: center;
+    font-weight: 600;
+}
+.front .langs {
+    display: flex;
+    justify-content: space-around;
+}
+.front .lang {
+    font-size: 150%;
+    text-align: center;
+}
+.front .lang input {
+    background: transparent;
+    border: 0;
+    display: inline-block;
+    height: 0;
+    position: absolute;
+    visibility: hidden;
+    width: 0;
+}
+.front .lang label {
+    cursor: pointer;
+}
+.front .lang input:checked + label {
+    text-decoration: line-through;
+}
+.front button.start,
+.credits button.replay {
+    background: #000;
+    border: solid calc(var(--sizeBase) * 9) #fff;
+    border-radius: 1em;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 100%;
+    margin: 0 auto;
+    outline: none;
+    padding: .25em .75em;
+    transition: box-shadow .2s;
+}
+.front button.start:hover {
+    box-shadow: inset 0 0 1em #fff;
+}
+.credits {
+    background: #000 url(imgs/planets.jpg) no-repeat right / contain;
+    font-size: calc(var(--sizeBase) * 120);
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+body.play .credits {
+    animation: calc(var(--timeBase) * 1) credits calc(var(--fadeOutDelay) + var(--pause) * 4) 1 forwards;
+}
+.credits .author {
+    font-size: 240%;
+    margin-bottom: calc(var(--sizeBase) * 200);
+    padding-right: calc(var(--sizeBase) * 360);
+    padding-top: calc(var(--sizeBase) * 200);
+    text-align: right;
+    text-shadow: 0 0 0.1em #000;
+}
+.credits a {
+    color: #d4d6d8;
+    display: inline-block;
+    vertical-align: middle;
+}
+.credits .link::before {
+    display: inline-block;
+    height: 1em;
+    margin-right: .5ch;
+    vertical-align: middle;
+    width: 1em;
+}
+.credits .email::before {
+    content: url(icons/email.svg);
+}
+.credits .github::before {
+    content: url(icons/github.svg);
+}
+.credits .facebook::before {
+    content: url(icons/facebook.svg);
+}
+.credits .resources {
+    margin-top: calc(var(--sizeBase) * 250);
+}
+.credits button.replay {
+    position: absolute;
+    bottom: calc(var(--sizeBase) * 100);
+    left: calc(var(--sizeBase) * 100);
+}
+
+
+/** Keyframes */
+@keyframes text {
+    0% { opacity: 0; transform: translateX(var(--translate)); }
+    20% { opacity: 1; transform: translateX(0); }
+    80% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(calc(-1 * var(--translate))); }
+}
+
+@keyframes distance-object {
+    0% { opacity: 0; transform: var(--transform); }
+    25% { opacity: 1; transform: var(--transform); }
+    75% { opacity: 1; transform: var(--transform); }
+    100% { opacity: 1; transform: scale(1) translateX(0); }
+}
+
+@keyframes distance-desc {
+    0% { opacity: 0; transform: scale(1.5) translateY(var(--translate)); }
+    80% { opacity: 1; transform: scale(1.5) translateY(var(--translate)); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes planet {
+    0% { opacity: 0; }
+    12.5% { opacity: 1; }
+    80% { opacity: 1; transform: scale(var(--scale)) translateX(calc((var(--center) / var(--scale)) - (var(--left) / var(--scale)))); }
+    100% { opacity: 1; transform: scale(1) translateX(0); }
+}
+
+@keyframes saturn-planet {
+    0% { transform: rotateZ(0deg); }
+    80% { transform: rotateZ(0deg); }
+    100% { transform: rotateZ(40deg); }
+}
+@keyframes saturn-rings {
+    0% { transform: rotateX(83deg) rotateY(0deg) scaleX(1.3); }
+    80% { transform: rotateX(83deg) rotateY(0deg) scaleX(1.3); }
+    100% { transform: rotateX(83deg) rotateY(40deg) scaleX(1.3); }
+}
+
+@keyframes planet-desc {
+    1% { opacity: 0; width: 0; }
+    2% { opacity: 0; width: 600%; }
+    40% { opacity: 1; width: 600%; }
+    89% { opacity: 1; width: 600%; }
+    99% { opacity: 0; width: 600%; }
+    100% { opacity: 0; width: 0; }
+}
+
+@keyframes total-length {
+    0% { opaity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeout {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes credits {
+    0% { height: 0; }
+    1% { height: var(--height); opacity: 0; }
+    100% { height: var(--height); opacity: 1; }
+}
+@media (min-height: 300px) {
+    :root {
+        --sizeFactor: .7;
+    }
+}
+@media (min-height: 500px) {
+    :root {
+        --sizeFactor: 1;
+    }
+}
+@media (min-height: 700px) {
+    :root {
+        --sizeFactor: 1.2;
+    }
+}
+@media (min-height: 1200px) {
+    :root {
+        --sizeFactor: 1.4;
+    }
+}
+@media (min-height: 1300px) {
+    :root {
+        --sizeFactor: 1.6;
+    }
+}
