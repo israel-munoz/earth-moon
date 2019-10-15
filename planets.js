@@ -39,7 +39,25 @@
             this.classList.add('pause');
         }
     }
+    function supportsWebp(callback) {
+        var data = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAIAAgA0JaQAA3AA/vuUAAA=';
+        var img = document.createElement('img');
+        img.addEventListener('load', function () {
+            if (this.width === 2 && this.height === 2) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        });
+        img.addEventListener('error', function () {
+            callback(false);
+        });
+        img.src = data;
+    }
     function init() {
+        supportsWebp(function (result) {
+            result || document.documentElement.classList.add('no-webp');
+        });
         var langs = document.querySelectorAll('.lang input'),
             playButtons = document.querySelectorAll('.start, .replay');
         langs.forEach(function (i) {

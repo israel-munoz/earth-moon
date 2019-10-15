@@ -223,18 +223,24 @@ body.play .distance .planet {
 .distance .planet.earth {
     --transform: scale(10) translateX(calc((var(--center) - var(--sizeBase) * 600) / 10));
     --planet: var(--earth);
-    --image: url(imgs/earth.png);
+    --image: url(imgs/earth.webp);
     left: 0;
     top: calc((var(--height) - var(--earth)) / 2);
     transform: var(--transform)!important;
 }
+.no-webp .distance .planet.earth {
+    --image: url(imgs/earth.png);
+}
 .distance .planet.moon {
     --transform: scale(10) translateX(calc((var(--center) - var(--sizeBase) * 600) / -10));
     --planet: var(--moon);
-    --image: url(imgs/moon.png);
+    --image: url(imgs/moon.webp);
     right: 0;
     top: calc((var(--height) - var(--moon)) / 2);
     transform: var(--transform);
+}
+.no-webp .distance .planet.moon {
+    --image: url(imgs/moon.png);
 }
 .distance .description {
     --translate: calc(var(--sizeBase) * 100);
@@ -286,6 +292,9 @@ body.play .planets .planet .description {
     --scale: 20;
     --planet: var(--mercury);
     --left: var(--earth);
+    --image: url(imgs/mercury.webp);
+}
+.no-webp .planets .planet.mercury {
     --image: url(imgs/mercury.png);
 }
 .planets .planet.venus {
@@ -293,23 +302,30 @@ body.play .planets .planet .description {
     --scale: 8.04;
     --planet: var(--venus);
     --left: calc(var(--earth) + var(--mercury));
+    --image: url(imgs/venus.webp);
+}
+.no-webp .planets .planet.venus {
     --image: url(imgs/venus.png);
 }
-
 .planets .planet.mars {
     --index: 2;
     --scale: 14.33;
     --planet: var(--mars);
     --left: calc(var(--earth) + var(--mercury) + var(--venus));
+    --image: url(imgs/mars.webp);
+}
+.no-webp .planets .planet.mars {
     --image: url(imgs/mars.png);
 }
-
 .planets .planet.jupiter {
     --index: 3;
     --scale: .677;
     --planet: var(--jupiter);
     --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars));
-    --image: url(imgs/jupiter.png);
+    --image: url(imgs/jupiter.webp);
+}
+.no-webp .planets .planet.jupiter {
+    --image: url(imgs/mars.png);
 }
 .planets .planet.saturn {
     --index: 4;
@@ -328,13 +344,16 @@ body.play .planets .planet .description {
     position: absolute;
 }
 .planet.saturn::before {
-    background-image: url(imgs/saturn.png);
+    background-image: url(imgs/saturn.webp);
     background-size: 100% 100%;
     height: 100%;
     left: 0;
     top: 0;
     transform: rotateZ(40deg);
     width: 100%;
+}
+.no-webp .planet.saturn::before {
+    background-image: url(imgs/saturn.png);
 }
 body.play .planet.saturn::before {
     animation: saturn-planet var(--planetDuration) linear calc(var(--planetDelay) + var(--planetDuration) * var(--index) + var(--pause) * 2) 1 forwards;
@@ -355,6 +374,9 @@ body.play .planet.saturn::after {
     --scale: 1.898;
     --planet: var(--uranus);
     --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars) + var(--jupiter) + var(--saturn));
+    --image: url(imgs/uranus.webp);
+}
+.no-webp .planets .planet.uranus {
     --image: url(imgs/uranus.png);
 }
 .planets .planet.neptune {
@@ -362,9 +384,11 @@ body.play .planet.saturn::after {
     --scale: 1.963;
     --planet: var(--neptune);
     --left: calc(var(--earth) + var(--mercury) + var(--venus) + var(--mars) + var(--jupiter) + var(--saturn) + var(--uranus));
+    --image: url(imgs/neptune.webp);
+}
+.no-webp .planets .planet.neptune {
     --image: url(imgs/neptune.png);
 }
-
 .planets .total-length {
     font-size: calc(var(--unitBase) * 2.5);
     opacity: 0;
@@ -444,6 +468,7 @@ body.play .planets .total-length {
 }
 .credits {
     background: #000 url(imgs/planets.jpg) no-repeat right / contain;
+    background-image: url(imgs/planets.webp);
     font-size: calc(var(--sizeBase) * 120);
     height: 0;
     opacity: 0;

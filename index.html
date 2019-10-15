@@ -107,168 +107,195 @@
 -->
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-    <head>
-        <title>From Earth to the Moon</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta name="description" content="Example of CSS variables for animations"/>
-        <meta name="author" content="Israel Muñoz <israel.munoz.v@gmail.com>"/>
-        <link href="planets.css" rel="stylesheet"/>
-        <link rel="shortcut icon" href="imgs/earth.png"/>
-    </head>
-    <body>
-        <div class="poster">
-            <h1>From Earth to the Moon. A CSS variables exercise</h1>
-            <img src="imgs/og_image.jpg"/>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Israel Munoz, israel.munoz.v@gmail.com">
+    <meta name="subject" content="From Earth to the Moon | destesoft.com">
+    <meta name="description" content="Animation controlled by CSS variables.">
+    <meta name="keywords" content="web,html,css,javascript">
+    <meta name="robots" content="all">
+    <meta name="revised" content="Tuesday, October 15th, 2019, 11:21 am">
+    <meta name="abstract" content="Animation controlled by CSS variables">
+    <meta name="topic" content="Web development">
+    <meta name="url" content="http://experiments.destesoft.com/earth-moon/">
+    <meta name="theme-color" content="#000">
+    <meta property="og:title" content="From Earth to the Moon | destesoft.com">
+    <meta property="og:site_name" content="From Earth to the Moon | destesoft.com">
+    <meta property="og:description" content="Animation controlled by CSS variables.">
+    <meta property="og:url" content="http://experiments.destesoft.com/earth-moon/">
+    <meta property="og:image" content="http://experiments.destesoft.com/earth-moon/imgs/og_image.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="http://experiments.destesoft.com/earth-moon/">
+    <meta name="twitter:creator" content="@isra_mv">
+    <meta name="twitter:title" content="From Earth to the Moon | destesoft.com">
+    <meta name="twitter:description" content="Animation controlled by CSS variables.">
+    <meta name="twitter:image" content="http://experiments.destesoft.com/earth-moon/imgs/og_image.png">
+    <meta name="msapplication-square310x310logo" content="imgs/earth.png">
+    <title>From Earth to the Moon | destesoft.com</title>
+    <link rel="preload" as="style" href="planets.css">
+    <link href="planets.css" rel="stylesheet">
+    <link rel="shortcut icon" href="imgs/earth.png">
+    <link rel="apple-touch-icon" href="imgs/earth.png">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-137839577-1"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-137839577-1');</script>
+</head>
+<body>
+    <div class="poster">
+        <h1>From Earth to the Moon. A CSS variables exercise</h1>
+        <img src="imgs/og_image.jpg" alt="Poster image" srcset="imgs/og_image.webp"/>
+    </div>
+    <div class="front">
+        <h1>Idioma / Language</h1>
+        <div class="langs">
+            <div class="lang">
+                <input type="radio" name="lang" id="lang-en" value="en" checked="checked"/>
+                <label for="lang-en">English</label>
+            </div>
+            <div class="lang">
+                <input type="radio" name="lang" id="lang-es" value="es" />
+                <label for="lang-es">Español</label>
+            </div>
         </div>
-        <div class="front">
-            <h1>Idioma / Language</h1>
+        <button type="button" class="start">
+            <span class="en">Start</span>
+            <span class="es">Iniciar</span>
+        </button>
+    </div>
+    <div class="system">
+        <menu class="controls">
             <div class="langs">
                 <div class="lang">
-                    <input type="radio" name="lang" id="lang-en" value="en" checked="checked"/>
-                    <label for="lang-en">English</label>
+                    <input type="radio" name="menu-lang" id="menu-lang-en" value="en" checked="checked"/>
+                    <label for="menu-lang-en">EN</label>
                 </div>
                 <div class="lang">
-                    <input type="radio" name="lang" id="lang-es" value="es" />
-                    <label for="lang-es">Español</label>
+                    <input type="radio" name="menu-lang" id="menu-lang-es" value="es"/>
+                    <label for="menu-lang-es">ES</label>
                 </div>
             </div>
-            <button type="button" class="start">
-                <span class="en">Start</span>
-                <span class="es">Iniciar</span>
-            </button>
-        </div>
-        <div class="system">
-            <menu class="controls">
-                <div class="langs">
-                    <div class="lang">
-                        <input type="radio" name="menu-lang" id="menu-lang-en" value="en" checked="checked"/>
-                        <label for="menu-lang-en">EN</label>
-                    </div>
-                    <div class="lang">
-                        <input type="radio" name="menu-lang" id="menu-lang-es" value="es"/>
-                        <label for="menu-lang-es">ES</label>
-                    </div>
-                </div>
-                <button class="play"></button>
-            </menu>
-            <h1>
-                <span class="en">Did you know...</span>
-                <span class="es">¿Sabías que...</span>
-            </h1>
-            <h2>
-                <span class="en">...when the moon is at its farthest point from Earth, all the other planets of the Solar System fit between them?</span>
-                <span class="es">...cuando la Luna está en su punto más alejado de la Tierra, todos los demás planetas del Sistema Solar caben entre ellas?</span>
+            <button class="play" aria-label="Play"></button>
+        </menu>
+        <h1>
+            <span class="en">Did you know...</span>
+            <span class="es">¿Sabías que...</span>
+        </h1>
+        <h2>
+            <span class="en">...when the moon is at its farthest point from Earth, all the other planets of the Solar System fit between them?</span>
+            <span class="es">...cuando la Luna está en su punto más alejado de la Tierra, todos los demás planetas del Sistema Solar caben entre ellas?</span>
 
-                </h2>
-            <div class="distance">
-                <div class="planet earth"></div>
-                <div class="planet moon"></div>
+            </h2>
+        <div class="distance">
+            <div class="planet earth"></div>
+            <div class="planet moon"></div>
+            <div class="description">
+                <span class="en">Distance from Moon to Earth at apogee:</span>
+                <span class="es">Distancia de la Luna a la Tierra en el apogeo:</span>
+                406,000 km
+            </div>
+        </div>
+        <div class="planets">
+            <div class="planet mercury">
                 <div class="description">
-                    <span class="en">Distance from Moon to Earth at apogee:</span>
-                    <span class="es">Distancia de la Luna a la Tierra en el apogeo:</span>
-                    406,000 km
+                    <div class="name">
+                        <span class="en">Mercury</span>
+                        <span class="es">Mercurio</span>
+                    </div>
+                    <div class="size">4,879.4 km</div>
                 </div>
             </div>
-            <div class="planets">
-                <div class="planet mercury">
-                    <div class="description">
-                        <div class="name">
-                            <span class="en">Mercury</span>
-                            <span class="es">Mercurio</span>
-                        </div>
-                        <div class="size">4,879.4 km</div>
+            <div class="planet venus">
+                <div class="description">
+                    <div class="name">Venus</div>
+                    <div class="size">12,103.6 km</div>
+                </div>
+            </div>
+            <div class="planet mars">
+                <div class="description">
+                    <div class="name">
+                        <span class="en">Mars</span>
+                        <span class="es">Marte</span>
                     </div>
+                    <div class="size">6,794.4 km</div>
                 </div>
-                <div class="planet venus">
-                    <div class="description">
-                        <div class="name">Venus</div>
-                        <div class="size">12,103.6 km</div>
+            </div>
+            <div class="planet jupiter">
+                <div class="description">
+                    <div class="name">
+                        <span class="en">Jupiter</span>
+                        <span class="es">Júpiter</span>
                     </div>
+                    <div class="size">142,984 km</div>
                 </div>
-                <div class="planet mars">
-                    <div class="description">
-                        <div class="name">
-                            <span class="en">Mars</span>
-                            <span class="es">Marte</span>
-                        </div>
-                        <div class="size">6,794.4 km</div>
+            </div>
+            <div class="planet saturn">
+                <div class="description">
+                    <div class="name">
+                        <span class="en">Saturn</span>
+                        <span class="es">Saturno</span>
                     </div>
+                    <div class="size">120,536 km</div>
                 </div>
-                <div class="planet jupiter">
-                    <div class="description">
-                        <div class="name">
-                            <span class="en">Jupiter</span>
-                            <span class="es">Júpiter</span>
-                        </div>
-                        <div class="size">142,984 km</div>
+            </div>
+            <div class="planet uranus">
+                <div class="description">
+                    <div class="name">
+                        <span class="en">Uranus</span>
+                        <span class="es">Urano</span>
                     </div>
+                    <div class="size">51,118 km</div>
                 </div>
-                <div class="planet saturn">
-                    <div class="description">
-                        <div class="name">
-                            <span class="en">Saturn</span>
-                            <span class="es">Saturno</span>
-                        </div>
-                        <div class="size">120,536 km</div>
+            </div>
+            <div class="planet neptune">
+                <div class="description">
+                    <div class="name">
+                        <span class="en">Neptune</span>
+                        <span class="es">Neptuno</span>
                     </div>
+                    <div class="size">49,572 km</div>
                 </div>
-                <div class="planet uranus">
-                    <div class="description">
-                        <div class="name">
-                            <span class="en">Uranus</span>
-                            <span class="es">Urano</span>
-                        </div>
-                        <div class="size">51,118 km</div>
-                    </div>
-                </div>
-                <div class="planet neptune">
-                    <div class="description">
-                        <div class="name">
-                            <span class="en">Neptune</span>
-                            <span class="es">Neptuno</span>
-                        </div>
-                        <div class="size">49,572 km</div>
-                    </div>
-                </div>
-                <div class="total-length">
-                    <span class="en">Approximate sum of the diameters of the planets (except Earth):</span>
-                    <span class="es">Suma aproximada de los diámetros de los planetas (excepto la Tierra):</span>
-                    387,987.4 km
-                </div>
+            </div>
+            <div class="total-length">
+                <span class="en">Approximate sum of the diameters of the planets (except Earth):</span>
+                <span class="es">Suma aproximada de los diámetros de los planetas (excepto la Tierra):</span>
+                387,987.4 km
             </div>
         </div>
-        <div class="credits">
-            <div class="author">Israel Mu&ntilde;oz</div>
-            <div class="link email"><a href="mailto:israel.munoz.v@gmail.com" target="_blank">israel.munoz.v@gmail.com</a></div>
-            <div class="link github"><a href="https://github.com/israel-munoz" target="_blank">https://github.com/israel-munoz</a></div>
-            <div class="link facebook"><a href="https://facebook.com/isra.mv" target="_blank">isra.mv</a></div>
+    </div>
+    <div class="credits">
+        <div class="author">Israel Mu&ntilde;oz</div>
+        <div class="link email"><a href="mailto:israel.munoz.v@gmail.com">israel.munoz.v@gmail.com</a></div>
+        <div class="link github"><a href="https://github.com/israel-munoz">https://github.com/israel-munoz</a></div>
+        <div class="link facebook"><a href="https://facebook.com/isra.mv">isra.mv</a></div>
 
-            <div class="resources">
-                <div class="link">
-                    <span class="en">Source:</span>
-                    <span class="es">Fuente:</span>
-                    <a href="https://www.wikipedia.org/" target="_blank">Wikipedia</a>
-                </div>
-                <div class="link">
-                    <span class="en">Images:</span>
-                    <span class="es">Imágenes:</span>
-                    <a href="https://www.wikimedia.org/" target="_blank">Wikimedia</a>
-                </div>
-                <div class="link">
-                    <span class="en">Starry Night background:</span>
-                    <span class="es">Fondo de estrellas:</span>
-                    <a href="http://lea.verou.me/css3patterns/" target="_blank">
-                        <span class="es">Galería de Patrones de CSS3 de</span>
-                        Lea Verou<span class="en">'s CSS3 Patterns Gallery</span></a>
-                </div>
+        <div class="resources">
+            <div class="link">
+                <span class="en">Source:</span>
+                <span class="es">Fuente:</span>
+                <a href="https://www.wikipedia.org/">Wikipedia</a>
             </div>
-
-            <button class="replay">
-                <span class="en">Replay</span>
-                <span class="es">Repetir</span>
-            </button>
+            <div class="link">
+                <span class="en">Images:</span>
+                <span class="es">Imágenes:</span>
+                <a href="https://www.wikimedia.org/">Wikimedia</a>
+            </div>
+            <div class="link">
+                <span class="en">Starry Night background:</span>
+                <span class="es">Fondo de estrellas:</span>
+                <a href="http://lea.verou.me/css3patterns/">
+                    <span class="es">Galería de Patrones de CSS3 de</span>
+                    Lea Verou<span class="en">'s CSS3 Patterns Gallery</span></a>
+            </div>
         </div>
-        <script src="planets.js"></script>
-    </body>
+
+        <button class="replay">
+            <span class="en">Replay</span>
+            <span class="es">Repetir</span>
+        </button>
+    </div>
+    <script src="planets.js" defer></script>
+</body>
 </html>
